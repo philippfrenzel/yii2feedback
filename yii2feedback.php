@@ -10,12 +10,10 @@
 
 namespace yii2feedback;
 
-use Yii;
 use yii\web\View;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\Json;
-use yii\web\JsExpression;
 use yii\base\Widget;
 
 class yii2feedback extends Widget
