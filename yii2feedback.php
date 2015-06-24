@@ -13,11 +13,12 @@ namespace yii2feedback;
 use Yii;
 use yii\web\View;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\web\JsExpression;
 use yii\base\Widget;
 
-class yii2visjs extends Widget
+class yii2feedback extends Widget
 {
 
     /**
@@ -26,7 +27,6 @@ class yii2visjs extends Widget
     * If a value is null, the corresponding attribute will not be rendered.
     */
     public $options = [
-        'class' => 'visjs',
     ];
 
     /**
@@ -36,36 +36,10 @@ class yii2visjs extends Widget
     ];
 
     /**
-     * how the graph will be displayed
-     * possible options: Timeline, Network, Graph2d, Graph3d
-     * @var string
-     */
-    public $visualization = 'Timeline';
-
-    /**
-    * Holds an array of Event Objects
-    * @var array events of yii2visjs\models\Event
-    * @todo add the event class and write docs
-    **/
-    public $dataSet = [];
-
-    /**
-     * Will hold an url to json formatted events!
-     * @var url to json service
-     */
-    public $ajaxEvents = NULL;
-    
-    /**
-     * the text that will be displayed on changing the pages
-     * @var string
-     */
-    public $loading = 'Loading ...';
-
-    /**
      * internal marker for the name of the plugin
      * @var string
      */
-    private $_pluginName = 'visJs';
+    private $_pluginName = 'feedbackJs';
 
     /**
      * Initializes the widget.
@@ -78,8 +52,8 @@ class yii2visjs extends Widget
             $this->options['id'] = $this->getId();
         }
          //checks for the element id
-        if (!isset($this->options['class'])) {
-            $this->options['class'] = 'visjs';
+        if (!isset($this->clientOptions['endpoint'])) {
+            $this->clientOptions['endpoint'] = Url::to(['site']);
         }
 
         parent::init();
@@ -91,16 +65,6 @@ class yii2visjs extends Widget
     public function run()
     {   
         $this->options['data-plugin-name'] = $this->_pluginName;
-
-        if (!isset($this->options['class'])) {
-            $this->options['class'] = 'visjs';
-        }
-        
-        echo Html::beginTag('div', $this->options) . "\n";
-            echo Html::beginTag('div',['class'=>'fc-loading','style' => 'display:none;']);
-                echo Html::encode($this->loading);
-            echo Html::endTag('div')."\n";
-        echo Html::endTag('div')."\n";
         $this->registerPlugin();
     }
 
@@ -117,24 +81,8 @@ class yii2visjs extends Widget
 
         $js = array();
 
-        if($this->ajaxEvents != NULL){
-            $this->clientOptions['events'] = $this->ajaxEvents;
-        }
-
         $cleanOptions = $this->getClientOptions();
-        $js[] = "var container$id = document.getElementById('$id');";
-
-        //lets check if we have an event for the calendar...
-        if(count($this->dataSet)>0)
-        {
-            $jsonDataSet = Json::encode($this->dataSet);
-            $js[] = "var data$id = new vis.DataSet($jsonDataSet);";
-        }
-
-        $visualization = $this->visualization;
-        
-        $js[] = "var timeline$id = new vis.$visualization(container$id, data$id, $cleanOptions);";
-
+        $js[] = "$.feedback($cleanOptions);";
 
         $view->registerJs(implode("\n", $js),View::POS_READY);
     }
