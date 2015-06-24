@@ -1,5 +1,5 @@
 {
-	"name": "philippfrenzel/yii2visjs",
+	"name": "philippfrenzel/yii2feedback",
 	"description": "Yii2 visjs Widgets",
 	"keywords": ["yii2", "VISJS"],
 	"homepage": "http://www.frenzel.net/",
@@ -14,7 +14,7 @@
 		}
 	],
 	"support": {
-		"source": "https://github.com/philippfrenzel/yii2visjs"
+		"source": "https://github.com/philippfrenzel/yii2feedback"
 	},
 	"minimum-stability": "stable",
 	"require": {
@@ -26,6 +26,6 @@
 		"codeception/codeception": "*"
 	},
 	"autoload": {
-		"psr-4": { "yii2visjs\\": "" }
+		"psr-4": { "yii2feedback\\": "" }
 	}
 }

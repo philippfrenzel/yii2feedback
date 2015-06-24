@@ -8,17 +8,16 @@
  *
  */
 
-namespace yii2visjs;
+namespace yii2feedback;
 
 use Yii;
-use yii\base\Model;
 use yii\web\View;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\JsExpression;
-use yii\base\Widget as elWidget;
+use yii\base\Widget;
 
-class yii2visjs extends elWidget
+class yii2visjs extends Widget
 {
 
     /**

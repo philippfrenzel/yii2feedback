@@ -1,8 +1,7 @@
 <?php
 
-namespace yii2visjs;
+namespace yii2feedback;
 
-use Yii;
 use yii\web\AssetBundle;
 
 /**
@@ -16,7 +15,7 @@ class CoreAsset extends AssetBundle
      * [$sourcePath description]
      * @var string
      */
-    public $sourcePath = '@bower/vis/dist';
+    public $sourcePath = '@yii2feedback/assets';
 
     /**
      * [$autoGenerate description]
@@ -29,7 +28,7 @@ class CoreAsset extends AssetBundle
      * @var array
      */
     public $css = [
-        'vis.css',
+        'css/feedback.css',
     ];
 
     /**
@@ -37,7 +36,8 @@ class CoreAsset extends AssetBundle
      * @var array
      */
     public $js = [
-        'vis.js',
+        'js/feedback.js',
+        '//cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js'
     ];
     
     /**
@@ -45,14 +45,7 @@ class CoreAsset extends AssetBundle
      * @var array
      */
     public $depends = [
+        'yii\web\JqueryAsset'
     ];
-
-    /**
-     * @inheritdoc
-     */
-    public function registerAssetFiles($view)
-    {
-        parent::registerAssetFiles($view);
-    }
 
 }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="feedback.js"></script>
+    <link rel="stylesheet" href="feedback.css" />
+    <script type="text/javascript">
+        $(function () {
+            $.feedback({
+                endpoint: 'listener',
+                categories: ['Example 1', 'Example 2', 'Another category']
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Example Usage</h1>
+    </header>
+    <main>
+        <div style="background: #9f0606; height: 300px; color: #fff;">
+            <center>
+                Hello there!
+            </center>
+        </div>
+    </main>
+</body>
+</html>
